@@ -14,25 +14,19 @@
 	--body-font: "Nunito", sans-serif;
 
 	/* Font sizes */
-	--big-font-size: 3rem;
 	--h1-font-size: 2rem;
-	--h2-font-size: 1.5rem;
-	--h3-font-size: 1.25rem;
-	--normal-font-size: 1rem;
-	--small-font-size: 0.938rem;
+	--h2-font-size: 1rem;
+	--normal-font-size: 0.8rem;
+	--small-font-size: 1rem;
 	--smaller-font-size: 0.813rem;
 }
 
 /* Font sizes for larger devices */
 @media screen and (min-width: 968px) {
 	:root {
-		--big-font-size: 4rem;
 		--h1-font-size: 3rem;
-		--h2-font-size: 2rem;
-		--h3-font-size: 1.5rem;
-		--normal-font-size: 1.25rem;
-		--small-font-size: 1rem;
-		--smaller-font-size: 0.938rem;
+		--h2-font-size: 1.2rem;
+		--normal-font-size: 1.1rem;
 	}
 }
 
@@ -72,6 +66,46 @@ a {
 }
 
 section {
+	padding: var(--header-height) var(--header-height);
 	width: 100%;
-	height: calc(100vh - var(--header-height));
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Style for unchecked checkboxes */
+input[type="checkbox"] {
+	appearance: none;
+	width: 2rem;
+	height: 2rem;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* Style for checked checkboxes */
+input[type="checkbox"]:checked {
+	background-color: var(--secondary-color);
+	border: 2px solid var(--secondary-color);
+	color: #fff;
+}
+
+.btn {
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 10px;
+	padding: 0.5rem 1rem;
+	font-weight: bold;
+}
+
+.btn.primary {
+	background-color: var(--secondary-color);
+	border-color: var(--secondary-color);
+	color: #fff;
+}
+
+.btn.primary:hover,
+.btn.primary:active {
+	background-color: transparent;
+	color: var(--secondary-color);
 }

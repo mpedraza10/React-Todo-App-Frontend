@@ -1,0 +1,12 @@
+.todo-list-container {
+	width: 100%;
+	padding: 1rem;
+	background-color: var(--lightgrey-color);
+	border-radius: 6px;
+}
+
+.todo-list-container .list {
+	display: flex;
+	flex-direction: column;
+    gap: 1rem;
+}
