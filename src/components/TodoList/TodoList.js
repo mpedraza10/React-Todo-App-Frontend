@@ -11,15 +11,6 @@ const TodoList = () => {
 				<TodoItem />
 				<TodoItem />
 				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
 			</ul>
 		</div>
 	);

@@ -90,6 +90,10 @@ input[type="checkbox"]:checked {
 	color: #fff;
 }
 
+button {
+  cursor: pointer;
+}
+
 .btn {
 	background-color: transparent;
 	border: 1px solid transparent;
@@ -108,4 +112,13 @@ input[type="checkbox"]:checked {
 .btn.primary:active {
 	background-color: transparent;
 	color: var(--secondary-color);
+}
+
+.btn.icon {
+  background-color: var(--lightgrey-color);
+  padding: 0.5rem;
+}
+
+.btn.icon:hover, .btn.icon:active {
+  background-color: #c8c8ce;
 }

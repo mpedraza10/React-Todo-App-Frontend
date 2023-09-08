@@ -15,3 +15,8 @@
 	justify-content: space-between;
 	align-items: center;
 }
+
+.todo-item .btns-cont {
+    display: flex;
+    gap: 0.5rem;
+}

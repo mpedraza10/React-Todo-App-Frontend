@@ -1,6 +1,10 @@
 // Style
 import "./TodoItem.css";
 
+// Fontawesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
+
 const TodoItem = () => {
 	return (
 		<li className="todo-item">
@@ -14,8 +18,12 @@ const TodoItem = () => {
 					<span>3:00 PM, 01/01/2024</span>
 				</div>
 				<div className="btns-cont">
-					<button>D</button>
-					<button>E</button>
+					<button className="btn icon edit-btn">
+						<FontAwesomeIcon icon={faPenToSquare} />
+					</button>
+					<button className="btn icon delete-btn">
+						<FontAwesomeIcon icon={faTrashAlt} />
+					</button>
 				</div>
 			</div>
 		</li>
