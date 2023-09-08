@@ -1,0 +1,31 @@
+.todo-form {
+	margin-top: 1rem;
+	z-index: 1111;
+}
+
+.todo-form h2 {
+	margin-bottom: 1rem;
+    text-align: center;
+}
+
+.todo-form div {
+	margin-bottom: 1rem;
+}
+
+.todo-form label {
+	font-weight: bold;
+	display: block;
+	font-size: 1.1rem;
+}
+
+.todo-form input {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid var(--primary-color);
+	border-radius: 4px;
+}
+
+.todo-form .btns-container {
+	display: flex;
+	gap: 1rem;
+}
