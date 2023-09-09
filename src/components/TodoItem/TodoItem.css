@@ -14,9 +14,15 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	gap: 1rem;
+}
+
+.todo-item .content h2.complete,
+.todo-item .content span.complete {
+	text-decoration: line-through;
 }
 
 .todo-item .btns-cont {
-    display: flex;
-    gap: 0.5rem;
+	display: flex;
+	gap: 0.5rem;
 }

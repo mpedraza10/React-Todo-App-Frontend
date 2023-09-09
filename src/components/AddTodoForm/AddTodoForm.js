@@ -4,7 +4,7 @@ import { useState } from "react";
 // Styles
 import "./AddTodoForm.css";
 
-const AddTodoForm = ({ onCancel }) => {
+const AddTodoForm = ({ onCancel, addTodo }) => {
 	const [task, setTask] = useState("");
 	const [status, setStatus] = useState(false);
 
@@ -14,12 +14,22 @@ const AddTodoForm = ({ onCancel }) => {
 		onCancel();
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		console.log(task);
-		console.log(status);
+		const todoData = {
+			text: task,
+			completed: status,
+		};
 
+		// Call method to post new todo
+		await addTodo(todoData);
+
+		// Set back to default values
+		setTask("");
+		setStatus(false);
+
+		// Close modal
 		onCancel();
 	};
 
@@ -41,7 +51,11 @@ const AddTodoForm = ({ onCancel }) => {
 					name="status"
 					id="status"
 					value={status}
-					onChange={(e) => setStatus(e.target.value)}
+					onChange={(e) => {
+						const selectedValue = e.target.value;
+						const isChecked = selectedValue === "true";
+						setStatus(isChecked);
+					}}
 				>
 					<option value={false}>Incomplete</option>
 					<option value={true}>Complete</option>
