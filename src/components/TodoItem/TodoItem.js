@@ -13,7 +13,7 @@ import { faPenToSquare, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 const TodoItem = ({ todo, updateTodo, deleteTodo }) => {
 	const [todoDate, setTodoDate] = useState("");
-	const [isCompleted, setIsCompleted] = useState(false);
+	// const [isCompleted, setIsCompleted] = useState(false);
 	const [updateModalToggle, setUpdateModalToggle] = useState(false);
 
 	// Helper function
@@ -42,9 +42,6 @@ const TodoItem = ({ todo, updateTodo, deleteTodo }) => {
 		const retrievedDate = new Date(todo.date);
 		const formattedDate = formatDate(retrievedDate);
 		setTodoDate(formattedDate);
-
-		// Keep track of checked process
-		setIsCompleted(todo.completed);
 	}, []);
 
 	return (
@@ -53,13 +50,18 @@ const TodoItem = ({ todo, updateTodo, deleteTodo }) => {
 				<input
 					type="checkbox"
 					className="checkbox-style" // Add this class for styling
-					checked={isCompleted}
-					onChange={() => setIsCompleted(!isCompleted)}
+					checked={todo.completed}
+					onChange={() =>
+						updateTodo(todo._id, {
+							text: todo.text,
+							completed: !todo.completed,
+						})
+					}
 				/>
 				<div className="content">
 					<div className="info">
-						<h2 className={isCompleted ? "complete" : ""}>{todo.text}</h2>
-						<span className={isCompleted ? "complete" : ""}>{todoDate}</span>
+						<h2 className={todo.completed ? "complete" : ""}>{todo.text}</h2>
+						<span className={todo.completed ? "complete" : ""}>{todoDate}</span>
 					</div>
 					<div className="btns-cont">
 						<button className="btn icon edit-btn" onClick={handleUpdate}>
