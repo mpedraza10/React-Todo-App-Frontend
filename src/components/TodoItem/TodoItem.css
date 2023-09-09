@@ -1,0 +1,28 @@
+.todo-item {
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
+	background-color: #fff;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	border-radius: 4px;
+}
+
+.todo-item .content {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+}
+
+.todo-item .content h2.complete,
+.todo-item .content span.complete {
+	text-decoration: line-through;
+}
+
+.todo-item .btns-cont {
+	display: flex;
+	gap: 0.5rem;
+}
