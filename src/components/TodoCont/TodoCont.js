@@ -35,14 +35,10 @@ const TodoCont = () => {
 
 	const updateTodo = async (todoId, todoData) => {
 		try {
-			console.log(todoData);
-
 			const response = await axios.put(
 				`http://localhost:5001/todos/${todoId}`,
 				todoData
 			);
-
-			console.log(response);
 
 			setTodos((prevList) =>
 				prevList.map((item) => (item._id === todoId ? response.data : item))
