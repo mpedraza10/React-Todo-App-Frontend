@@ -1,12 +1,15 @@
 // Imports
+import { useEffect } from "react";
+
+// Imports
 import { useState } from "react";
 
 // Styles
 import "./AddTodoForm.css";
 
-const AddTodoForm = ({ onCancel, addTodo }) => {
-	const [task, setTask] = useState("");
-	const [status, setStatus] = useState(false);
+const AddTodoForm = ({ type, onCancel, addTodo, updateTodo, todo }) => {
+	const [task, setTask] = useState(type === "add" ? "" : todo.text);
+	const [status, setStatus] = useState(type === "add" ? false : todo.completed);
 
 	// Helper functions
 	const handleCancel = (e) => {
@@ -22,12 +25,16 @@ const AddTodoForm = ({ onCancel, addTodo }) => {
 			completed: status,
 		};
 
-		// Call method to post new todo
-		await addTodo(todoData);
+		// Call method to post new todo or update depending on type
+		if (type === "add") {
+			await addTodo(todoData);
 
-		// Set back to default values
-		setTask("");
-		setStatus(false);
+			// Set back to default values
+			setTask("");
+			setStatus(false);
+		} else {
+			await updateTodo(todo._id, todoData);
+		}
 
 		// Close modal
 		onCancel();
@@ -35,7 +42,7 @@ const AddTodoForm = ({ onCancel, addTodo }) => {
 
 	return (
 		<form className="todo-form" onSubmit={handleSubmit}>
-			<h2>Add your task</h2>
+			<h2>{type === "add" ? "Add" : "Update"} your task</h2>
 			<div>
 				<label htmlFor="text">Title:</label>
 				<input
@@ -63,7 +70,7 @@ const AddTodoForm = ({ onCancel, addTodo }) => {
 			</div>
 			<div className="btns-container">
 				<button type="submit" className="btn primary">
-					Add Task
+					{type === "add" ? "Add" : "Update"} Task
 				</button>
 				<button className="btn secondary" onClick={handleCancel}>
 					Cancel

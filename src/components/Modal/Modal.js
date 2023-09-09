@@ -7,7 +7,7 @@ import AddTodoForm from "../AddTodoForm/AddTodoForm";
 // Styles
 import "./Modal.css";
 
-const Modal = ({ isVisible, onClose, addTodo }) => {
+const Modal = ({ type, isVisible, onClose, addTodo, updateTodo, todo }) => {
 	// Effects
 
 	// Attach a keydown event listener to the window
@@ -32,7 +32,13 @@ const Modal = ({ isVisible, onClose, addTodo }) => {
 				<button className="close-button" onClick={onClose}>
 					&times;
 				</button>
-				<AddTodoForm onCancel={onClose} addTodo={addTodo} />
+				<AddTodoForm
+					onCancel={onClose}
+					addTodo={addTodo}
+					updateTodo={updateTodo}
+					type={type}
+					todo={todo}
+				/>
 			</div>
 		</div>
 	);

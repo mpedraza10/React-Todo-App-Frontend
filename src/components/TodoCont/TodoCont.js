@@ -33,6 +33,21 @@ const TodoCont = () => {
 		}
 	};
 
+	const updateTodo = async (todoId, todoData) => {
+		try {
+			const response = await axios.put(
+				`http://localhost:5001/todos/${todoId}`,
+				todoData
+			);
+
+			setTodos((prevList) =>
+				prevList.map((item) => (item._id === todoId ? response.data : item))
+			);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const deleteTodo = async (todoId) => {
 		try {
 			await axios.delete(`http://localhost:5001/todos/${todoId}`);
@@ -64,12 +79,13 @@ const TodoCont = () => {
 					Add Todo
 				</button>
 				<Modal
+					type="add"
 					isVisible={isModalVisible}
 					onClose={toggleModal}
 					addTodo={addTodo}
 				/>
 			</div>
-			<TodoList todos={todos} deleteTodo={deleteTodo} />
+			<TodoList todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
 		</div>
 	);
 };
