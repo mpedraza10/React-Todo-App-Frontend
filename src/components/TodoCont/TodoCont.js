@@ -12,11 +12,18 @@ import "./TodoCont.css";
 const TodoCont = () => {
 	// State
 	const [todos, setTodos] = useState([]);
+	const [originalTodos, setOriginalTodos] = useState([]);
 	const [isModalVisible, setModalVisible] = useState(false);
+	const [selectedFilter, setSelectedFilter] = useState("all");
 
 	// Helper functions
 	const toggleModal = () => {
 		setModalVisible(!isModalVisible);
+	};
+
+	const handleFilterChange = (e) => {
+		const selectedValue = e.target.value;
+		setSelectedFilter(selectedValue);
 	};
 
 	// Methods
@@ -65,6 +72,7 @@ const TodoCont = () => {
 				const response = await axios.get("http://localhost:5001/todos");
 
 				setTodos(response.data);
+				setOriginalTodos(response.data);
 			} catch (error) {
 				console.log(error);
 			}
@@ -72,21 +80,54 @@ const TodoCont = () => {
 		getTodos();
 	}, []);
 
+	useEffect(() => {
+		if (selectedFilter === "complete") {
+			const filteredTodos = originalTodos.filter(
+				(item) => item.completed === true
+			);
+			setTodos(filteredTodos);
+		} else if (selectedFilter === "incomplete") {
+			const filteredTodos = originalTodos.filter(
+				(item) => item.completed === false
+			);
+			setTodos(filteredTodos);
+		} else {
+			setTodos(originalTodos);
+		}
+	}, [selectedFilter]);
+
 	return (
-		<div className="todo-container">
-			<div className="controls">
-				<button className="btn primary" onClick={toggleModal}>
-					Add Todo
-				</button>
-				<Modal
-					type="add"
-					isVisible={isModalVisible}
-					onClose={toggleModal}
-					addTodo={addTodo}
+		<>
+			<div className="todo-container">
+				<div className="controls">
+					<div>
+						<select
+							id="filterSelect"
+							value={selectedFilter}
+							onChange={handleFilterChange}
+						>
+							<option value="all">All</option>
+							<option value="incomplete">Incomplete</option>
+							<option value="complete">Complete</option>
+						</select>
+					</div>
+					<button className="btn primary" onClick={toggleModal}>
+						Add Todo
+					</button>
+				</div>
+				<TodoList
+					todos={todos}
+					updateTodo={updateTodo}
+					deleteTodo={deleteTodo}
 				/>
 			</div>
-			<TodoList todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
-		</div>
+			<Modal
+				type="add"
+				isVisible={isModalVisible}
+				onClose={toggleModal}
+				addTodo={addTodo}
+			/>
+		</>
 	);
 };
 
