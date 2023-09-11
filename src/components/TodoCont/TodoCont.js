@@ -30,7 +30,7 @@ const TodoCont = () => {
 	const addTodo = async (todoData) => {
 		try {
 			const response = await axios.post(
-				"http://localhost:5001/todos",
+				"http://localhost:5001/api/todos",
 				todoData
 			);
 
@@ -44,7 +44,7 @@ const TodoCont = () => {
 	const updateTodo = async (todoId, todoData) => {
 		try {
 			const response = await axios.put(
-				`http://localhost:5001/todos/${todoId}`,
+				`http://localhost:5001/api/todos/${todoId}`,
 				todoData
 			);
 
@@ -61,7 +61,7 @@ const TodoCont = () => {
 
 	const deleteTodo = async (todoId) => {
 		try {
-			await axios.delete(`http://localhost:5001/todos/${todoId}`);
+			await axios.delete(`http://localhost:5001/api/todos/${todoId}`);
 
 			setTodos((prevList) =>
 				prevList.filter((item) => item._id !== todoId)
@@ -78,7 +78,7 @@ const TodoCont = () => {
 	useEffect(() => {
 		const getTodos = async () => {
 			try {
-				const response = await axios.get("http://localhost:5001/todos");
+				const response = await axios.get("http://localhost:5001/api/todos");
 
 				setTodos(response.data);
 				setOriginalTodos(response.data);
