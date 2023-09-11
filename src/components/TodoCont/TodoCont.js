@@ -35,6 +35,7 @@ const TodoCont = () => {
 			);
 
 			setTodos([...todos, response.data]);
+			setOriginalTodos([...todos, response.data]);
 		} catch (error) {
 			console.log(error);
 		}
@@ -50,6 +51,9 @@ const TodoCont = () => {
 			setTodos((prevList) =>
 				prevList.map((item) => (item._id === todoId ? response.data : item))
 			);
+			setOriginalTodos((prevList) =>
+				prevList.map((item) => (item._id === todoId ? response.data : item))
+			);
 		} catch (error) {
 			console.log(error);
 		}
@@ -59,7 +63,12 @@ const TodoCont = () => {
 		try {
 			await axios.delete(`http://localhost:5001/todos/${todoId}`);
 
-			setTodos((prevList) => prevList.filter((item) => item._id !== todoId));
+			setTodos((prevList) =>
+				prevList.filter((item) => item._id !== todoId)
+			);
+			setOriginalTodos((prevList) =>
+				prevList.filter((item) => item._id !== todoId)
+			);
 		} catch (error) {
 			console.log(error);
 		}
