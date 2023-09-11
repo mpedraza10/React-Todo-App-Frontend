@@ -1,13 +1,12 @@
 // Imports
-import { useEffect } from "react";
-
-// Imports
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 // Styles
 import "./AddTodoForm.css";
 
 const AddTodoForm = ({ type, onCancel, addTodo, updateTodo, todo }) => {
+	// State
 	const [task, setTask] = useState(type === "add" ? "" : todo.text);
 	const [status, setStatus] = useState(type === "add" ? false : todo.completed);
 
@@ -19,6 +18,23 @@ const AddTodoForm = ({ type, onCancel, addTodo, updateTodo, todo }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		if (task.length <= 0) {
+			// Set back to default values
+			setTask("");
+			setStatus(false);
+
+			// Close modal
+			onCancel();
+
+			// Warning alert
+			return Swal.fire({
+				title: "Error!",
+				text: "You didn't add any task.",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+		}
 
 		const todoData = {
 			text: task,

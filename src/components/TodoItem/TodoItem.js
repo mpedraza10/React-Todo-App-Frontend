@@ -1,5 +1,6 @@
 // Imports
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 // Components
 import Modal from "../Modal/Modal";
@@ -74,7 +75,21 @@ const TodoItem = ({ todo, updateTodo, deleteTodo }) => {
 						</button>
 						<button
 							className="btn icon delete-btn"
-							onClick={() => deleteTodo(todo._id)}
+							onClick={() => {
+								Swal.fire({
+									title: "Do you want to delete the task?",
+									icon: "question",
+									confirmButtonText: "Delete",
+									showCancelButton: true,
+								}).then((result) => {
+									/* Read more about isConfirmed, isDenied below */
+									if (result.isConfirmed) {
+										deleteTodo(todo._id);
+									} else if (result.isDenied) {
+										return;
+									}
+								});
+							}}
 						>
 							<FontAwesomeIcon icon={faTrashAlt} />
 						</button>
